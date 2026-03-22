@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaEnvelope, FaLinkedin, FaGithub, FaJava, FaPython, FaCloud, FaRobot, FaDatabase, FaReact, FaFigma, FaCss3Alt, FaHtml5, FaJenkins, FaLock, FaEye, FaRegChartBar } from 'react-icons/fa';
+import { FaEnvelope, FaLinkedin, FaGithub, FaJava, FaPython, FaCloud, FaRobot, FaDatabase, FaReact, FaFigma, FaCss3Alt, FaHtml5, FaJenkins, FaLock, FaEye, FaRegChartBar, FaBars } from 'react-icons/fa';
 import { SiSpring, SiSap, SiGrafana, SiDynatrace, SiKibana, SiSonarqube, SiMysql } from 'react-icons/si';
 
 const profilePic = `${import.meta.env.BASE_URL}assets/profile.jpg`;
@@ -10,6 +10,7 @@ const bgImages = [
   `${import.meta.env.BASE_URL}assets/bg2.jpg`, // Experience
   `${import.meta.env.BASE_URL}assets/bg3.jpg`, // Skills
   `${import.meta.env.BASE_URL}assets/bg4.jpg`, // Contact
+  `${import.meta.env.BASE_URL}assets/bg5.jpg`, // Extra/placeholder
 ];
 
 const GlobalStyle = createGlobalStyle`
@@ -45,6 +46,12 @@ const CenteredSection = styled.section`
   position: relative;
   z-index: 1;
   scroll-snap-align: start;
+  overflow-x: hidden;
+  @media (max-width: 700px) {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    box-sizing: border-box;
+  }
 `;
 
 const GlassCard = styled(motion.div)`
@@ -62,8 +69,17 @@ const GlassCard = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media (min-width: 1200px) {
+  @media (max-width: 1200px) {
     max-width: 1400px;
+  }
+  @media (max-width: 700px) {
+    padding: 1.2rem 0.7rem;
+    max-width: 95vw;
+    min-width: 0;
+    font-size: 0.95rem;
+    margin: 1.2rem 0;
+    border-radius: 1.2rem;
+    box-shadow: 0 2px 12px 0 #00eaff33;
   }
 `;
 
@@ -80,6 +96,51 @@ const Nav = styled.nav`
   padding: 0.75rem 2rem;
   box-shadow: 0 2px 16px 0 #00eaff33;
   backdrop-filter: blur(8px);
+  @media (max-width: 700px) {
+    top: 0.7rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    width: calc(100vw - 1rem);
+    padding: 0.5rem 1rem;
+    border-radius: 1.2rem;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    transform: none;
+  }
+`;
+
+const Hamburger = styled.button`
+  display: none;
+  @media (max-width: 700px) {
+    display: block;
+    background: none;
+    border: none;
+    color: #00eaff;
+    font-size: 1.6rem;
+    margin-right: 0.5rem;
+    cursor: pointer;
+    z-index: 101;
+    padding: 0.2rem;
+  }
+`;
+
+const MobileNavLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: fixed;
+  top: 4.2rem;
+  left: 0;
+  right: 0;
+  background: rgba(24, 28, 39, 0.97);
+  border-radius: 1.2rem;
+  box-shadow: 0 2px 16px 0 #00eaff33;
+  padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+  align-items: center;
+  z-index: 999;
+  @media (min-width: 701px) {
+    display: none;
+  }
 `;
 
 const NavLink = styled.a`
@@ -94,16 +155,26 @@ const NavLink = styled.a`
     background: #00eaff33;
     color: #00eaff;
   }
+  @media (max-width: 700px) {
+    font-size: 1rem;
+    padding: 0.4rem 0.7rem;
+    text-align: center;
+  }
 `;
 
 const ProfileImg = styled(motion.img)`
-  width: 220px;
-  height: 220px;
+  width: 300px;
+  height: 300px;
   border-radius: 50%;
   object-fit: cover;
-  border: 5px solid #00eaff;
-  box-shadow: 0 0 48px #00eaff55;
-  margin-bottom: 2rem;
+  border: 4px solid #00eaff;
+  box-shadow: 0 0 32px #00eaff33;
+  margin-bottom: 2.5rem;
+  @media (max-width: 700px) {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 1.2rem;
+  }
 `;
 
 const Headline = styled(motion.h1)`
@@ -112,7 +183,11 @@ const Headline = styled(motion.h1)`
   margin: 0 0 1.2rem 0;
   letter-spacing: -2px;
   color: #fff;
-  text-shadow: 0 0 8px #00eaff33;
+  text-shadow: 0 0 4px #00eaff22;
+  @media (max-width: 700px) {
+    font-size: 2rem;
+    margin-bottom: 0.7rem;
+  }
 `;
 
 const Subheadline = styled(motion.h2)`
@@ -120,6 +195,10 @@ const Subheadline = styled(motion.h2)`
   font-weight: 400;
   color: #b2eaff;
   margin-bottom: 2.5rem;
+  @media (max-width: 700px) {
+    font-size: 1.1rem;
+    margin-bottom: 1.2rem;
+  }
 `;
 
 const Summary = styled(motion.p)`
@@ -128,6 +207,11 @@ const Summary = styled(motion.p)`
   max-width: 500px;
   text-align: center;
   margin-bottom: 2.5rem;
+  @media (max-width: 700px) {
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    max-width: 95vw;
+  }
 `;
 
 const SectionTitle = styled(motion.h2)`
@@ -138,6 +222,10 @@ const SectionTitle = styled(motion.h2)`
   letter-spacing: 1px;
   text-align: center;
   text-shadow: 0 0 16px #00eaff55, 0 2px 8px #000a, 0 0 32px #000c, 0 0 24px #0008;
+  @media (max-width: 700px) {
+    font-size: 1.5rem;
+    margin-bottom: 1.2rem;
+  }
 `;
 
 const CompanyBlock = styled(motion.div)`
@@ -147,6 +235,11 @@ const CompanyBlock = styled(motion.div)`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (max-width: 700px) {
+    max-width: 98vw;
+    margin: 1.2rem 0 1rem 0;
+    padding: 0 0.5rem;
+  }
 `;
 
 const CompanyHeader = styled.div`
@@ -155,6 +248,11 @@ const CompanyHeader = styled.div`
   justify-content: center;
   gap: 1.5rem;
   margin-bottom: 1.2rem;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-bottom: 0.7rem;
+  }
 `;
 
 const CompanyLogo = styled.img`
@@ -166,6 +264,11 @@ const CompanyLogo = styled.img`
   box-shadow: 0 0 16px #00eaff55, 0 0 0 2px #222;
   padding: 0.5rem;
   border: 2px solid #00eaff33;
+  @media (max-width: 700px) {
+    width: 64px;
+    height: 64px;
+    padding: 0.2rem;
+  }
 `;
 
 const CompanyName = styled.h3`
@@ -182,6 +285,11 @@ const ProjectCard = styled(GlassCard)`
   max-width: 1200px;
   min-width: 320px;
   width: 98vw;
+  @media (max-width: 700px) {
+    max-width: 98vw;
+    min-width: 0;
+    padding: 1.2rem 0.7rem;
+  }
 `;
 
 const ProjectTitle = styled.h4`
@@ -221,6 +329,12 @@ const SkillsGrid = styled.div`
   @media (max-width: 800px) {
     grid-template-columns: 1fr;
   }
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+    width: 98vw;
+  }
 `;
 
 const SkillCard = styled(motion.div)`
@@ -242,6 +356,12 @@ const SkillCard = styled(motion.div)`
     box-shadow: 0 8px 48px #00eaff77, 0 0 0 2px #00eaff44;
     transform: translateY(-6px) scale(1.03);
   }
+  @media (max-width: 600px) {
+    min-width: 0;
+    max-width: 98vw;
+    padding: 0.7rem 0.5rem;
+    font-size: 0.95em;
+  }
 `;
 
 const SkillIcon = styled.div`
@@ -253,6 +373,10 @@ const SkillIcon = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  @media (max-width: 600px) {
+    font-size: 2.2rem;
+    margin-bottom: 0.6rem;
+  }
 `;
 
 const SkillName = styled.div`
@@ -261,6 +385,10 @@ const SkillName = styled.div`
   font-weight: 700;
   text-align: center;
   margin-bottom: 0.53rem;
+  @media (max-width: 600px) {
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+  }
 `;
 
 const SkillDetail = styled.div`
@@ -269,6 +397,10 @@ const SkillDetail = styled.div`
   font-weight: 400;
   text-align: center;
   margin-top: 0.15rem;
+  @media (max-width: 600px) {
+    font-size: 0.7rem;
+    margin-top: 0.1rem;
+  }
 `;
 
 const ContactCard = styled(GlassCard)`
@@ -280,6 +412,11 @@ const ContactCard = styled(GlassCard)`
   flex-direction: column;
   align-items: center;
   box-shadow: 0 0 0 2px #000, 0 8px 48px #000c inset, 0 2px 24px #00eaff33;
+  @media (max-width: 700px) {
+    max-width: 98vw;
+    min-width: 0;
+    padding: 1.2rem 0.7rem;
+  }
 `;
 
 const ContactIcon = styled.div`
@@ -316,6 +453,20 @@ const HomeGlassCard = styled(GlassCard)`
   background: rgba(24, 28, 39, 0.45);
   margin-top: 3.5rem;
   font-size: 88%;
+  @media (max-width: 700px) {
+    max-width: 98vw;
+    margin-top: 2.2rem;
+    padding: 1.2rem 0.7rem;
+  }
+`;
+
+const DesktopNavLinks = styled.div`
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  @media (max-width: 700px) {
+    display: none !important;
+  }
 `;
 
 const scrollToSection = (ref, setBgIdx, idx) => {
@@ -332,9 +483,10 @@ export default function App() {
   const contactRef = useRef(null);
   const [bgIdx, setBgIdx] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [pendingIdx, setPendingIdx] = useState(null);
+  const [_pendingIdx, setPendingIdx] = useState(null);
   const sermasVideoRef = useRef(null);
   const [modalImg, setModalImg] = useState(null);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   // Custom background transition logic
   const handleBgChange = (idx) => {
@@ -398,10 +550,25 @@ export default function App() {
         transition={{ duration: 0.4 }}
       />
       <Nav>
-        <NavLink href="#home" onClick={e => { e.preventDefault(); scrollToSection(homeRef, handleBgChange, 0); }}>Home</NavLink>
-        <NavLink href="#experience" onClick={e => { e.preventDefault(); scrollToSection(expRef, handleBgChange, 1); }}>Experience</NavLink>
-        <NavLink href="#skills" onClick={e => { e.preventDefault(); scrollToSection(skillsRef, handleBgChange, 2); }}>Skills</NavLink>
-        <NavLink href="#contact" onClick={e => { e.preventDefault(); scrollToSection(contactRef, handleBgChange, 3); }}>Contact</NavLink>
+        <Hamburger onClick={() => setMobileNavOpen(v => !v)} aria-label="Toggle navigation menu">
+          <FaBars />
+        </Hamburger>
+        {/* Desktop nav links: hidden on mobile */}
+        <DesktopNavLinks>
+          <NavLink href="#home" onClick={e => { e.preventDefault(); scrollToSection(homeRef, handleBgChange, 0); setMobileNavOpen(false); }}>Home</NavLink>
+          <NavLink href="#experience" onClick={e => { e.preventDefault(); scrollToSection(expRef, handleBgChange, 1); setMobileNavOpen(false); }}>Experience</NavLink>
+          <NavLink href="#skills" onClick={e => { e.preventDefault(); scrollToSection(skillsRef, handleBgChange, 2); setMobileNavOpen(false); }}>Skills</NavLink>
+          <NavLink href="#contact" onClick={e => { e.preventDefault(); scrollToSection(contactRef, handleBgChange, 3); setMobileNavOpen(false); }}>Contact</NavLink>
+        </DesktopNavLinks>
+        {/* Mobile nav links: only shown when open */}
+        {mobileNavOpen && (
+          <MobileNavLinks>
+            <NavLink href="#home" onClick={e => { e.preventDefault(); scrollToSection(homeRef, handleBgChange, 0); setMobileNavOpen(false); }}>Home</NavLink>
+            <NavLink href="#experience" onClick={e => { e.preventDefault(); scrollToSection(expRef, handleBgChange, 1); setMobileNavOpen(false); }}>Experience</NavLink>
+            <NavLink href="#skills" onClick={e => { e.preventDefault(); scrollToSection(skillsRef, handleBgChange, 2); setMobileNavOpen(false); }}>Skills</NavLink>
+            <NavLink href="#contact" onClick={e => { e.preventDefault(); scrollToSection(contactRef, handleBgChange, 3); setMobileNavOpen(false); }}>Contact</NavLink>
+          </MobileNavLinks>
+        )}
       </Nav>
       {/* Home Section */}
       <CenteredSection ref={homeRef} id="home">
@@ -449,6 +616,32 @@ export default function App() {
           viewport={{ once: true }}
           transition={{ duration: 1.2 }}
         >Professional Experience</SectionTitle>
+        {/* Photocert */}
+        <CompanyBlock
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1.1, delay: 0.05 }}
+        >
+          <CompanyHeader>
+            <CompanyLogo src={`${import.meta.env.BASE_URL}assets/Photocert Logo.png`} alt="Photocert Logo" />
+            <CompanyName>Photocert</CompanyName>
+          </CompanyHeader>
+
+          {/* NEW: Photocert project update (top) */}
+          <ProjectCard>
+            <ProjectTitle>Central Logging and Exception Observability</ProjectTitle>
+            <ProjectDesc as="div" style={{ marginBottom: '0.5rem', width: '100%' }}>
+              <p>At Photocert, I recently designed, tested, and packaged a reusable exception logging solution to improve observability across services and environments. The goal was to create a central logging approach that captures application failures in a consistent, structured, and searchable format before exporting them to Grafana Cloud Loki through OpenTelemetry. I built a Python exception wrapper that can be attached to any repository, allowing teams to standardise exception capture without changing core business logic. I also added global exception handling for uncaught failures from main execution paths and background threads, plus function level wrapping for critical workflows where reliable logging is essential. </p>
+                <p> To make investigation easier in Grafana, I standardised structured fields such as service, instance, and environment so logs can be filtered, grouped, and queried cleanly. I then validated the full flow end to end by triggering controlled failures, confirming ingestion in Grafana, and proving the setup locally before wider rollout. The final outcome was a practical, reusable logging foundation with working code, setup guidance, and a lightweight integration path that the team can adopt quickly across existing applications. This work turned exception handling into a repeatable platform capability that supports faster debugging, clearer ownership, and safer deployments across teams.</p>
+            </ProjectDesc>
+            <div style={{ color: '#b2eaff', fontSize: '0.98rem', marginTop: '0.5rem', textAlign: 'center' }}>
+              Platform Engineering • Observability • OpenTelemetry • Grafana Loki • Python
+            </div>
+          </ProjectCard>
+
+          {/* Existing Photocert content below (unchanged) */}
+        </CompanyBlock>
         {/* King's College London */}
         <CompanyBlock
           initial={{ opacity: 0, y: 40 }}
