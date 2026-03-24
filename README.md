@@ -38,4 +38,4 @@ This repository contains the source code for my personal, story-driven portfolio
 
 ---
 
-For more details or to contribute, please contact [rishabh-kar@outlook.com](mailto:rishabh-kar@outlook.com).
+For more details or to contribute, please contact [rish-kar@outlook.com](mailto:rish-kar@outlook.com).
