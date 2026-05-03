@@ -3,6 +3,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaEnvelope, FaLinkedin, FaGithub, FaJava, FaPython, FaCloud, FaRobot, FaDatabase, FaReact, FaFigma, FaCss3Alt, FaHtml5, FaJenkins, FaLock, FaEye, FaRegChartBar, FaBars } from 'react-icons/fa';
 import { SiSpring, SiSap, SiGrafana, SiDynatrace, SiKibana, SiSonarqube, SiMysql } from 'react-icons/si';
+import {} from "react-icons/fa/index.d.ts";
 
 const profilePic = `${import.meta.env.BASE_URL}assets/profile.jpg`;
 const bgImages = [
@@ -596,7 +597,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2, delay: 0.5 }}
           >
-            Developer & AI Enthusiast
+            Software Engineer & AI Researcher
           </Subheadline>
           <Summary
             initial={{ opacity: 0, y: 20 }}
@@ -975,18 +976,18 @@ As I concurrently pursue my Master's in Artificial Intelligence at King's Colleg
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
         >
-          <ContactIcon><FaEnvelope /></ContactIcon>
+
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1.05rem' }}>
-            <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.04rem', marginBottom: '0.22rem', textAlign: 'center' }}>Email</div>
-            <ContactLink href="mailto:rishabh-kar@outlook.com"><FaEnvelope /> rishabh-kar@outlook.com</ContactLink>
+            <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.04rem', marginBottom: '0.22rem', textAlign: 'center' }}><FaEnvelope /> Email</div>
+            <ContactLink href="mailto:rish-kar@outlook.com"> rish-kar@outlook.com</ContactLink>
           </div>
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1.05rem' }}>
-            <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.04rem', marginBottom: '0.22rem', textAlign: 'center' }}>LinkedIn</div>
-            <ContactLink href="https://linkedin.com/in/rishabh-kar" target="_blank"><FaLinkedin /> linkedin.com/in/rishabh-kar</ContactLink>
+            <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.04rem', marginBottom: '0.22rem', textAlign: 'center' }}><FaLinkedin /> LinkedIn</div>
+            <ContactLink href="https://linkedin.com/in/rish-kar" target="_blank"> linkedin.com/in/rish-kar</ContactLink>
           </div>
           <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '1.05rem' }}>
-            <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.04rem', marginBottom: '0.22rem', textAlign: 'center' }}>Phone</div>
-            <ContactLink href="tel:+447741545045"><FaEnvelope /> +44 7741 545045</ContactLink>
+            <div style={{ fontWeight: 700, color: '#fff', fontSize: '1.04rem', marginBottom: '0.22rem', textAlign: 'center' }}><FaGithub /> GitHub</div>
+            <ContactLink href="https://github.com/rish-kar" target="_blank">rish-kar</ContactLink>
           </div>
         </ContactCard>
       </CenteredSection>
